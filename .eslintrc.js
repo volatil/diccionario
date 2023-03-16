@@ -23,6 +23,8 @@ module.exports = {
 		quotes: [2, "double"],
 		semi: [2, "always"],
 		"linebreak-style": 0,
+		"import/extensions": "off",
+		"import/no-unresolved": "off",
 		"no-unused-vars": "off",
 		"func-names": "off",
 		"no-plusplus": 0,

@@ -1,0 +1,95 @@
+{
+	"root": true,
+	"env": {
+		"browser": true,
+		"commonjs": true,
+		"es2021": true,
+		"jquery": true
+	},
+	"extends": [
+		"react-app",
+		"standard-with-typescript",
+		"airbnb",
+		"plugin:react/jsx-runtime"
+	],
+	"plugins": [],
+	"overrides": [],
+	"parserOptions": {
+		"ecmaVersion": "latest"
+	},
+	"rules": {
+		"no-tabs": 0,
+		"no-multi-spaces": [
+			"error"
+		],
+		"quotes": [
+			2,
+			"double"
+		],
+		"semi": [
+			2,
+			"always"
+		],
+		"linebreak-style": 0,
+		"no-unused-vars": "off",
+		"func-names": "off",
+		"no-plusplus": 0,
+		"space-in-parens": 0,
+		"prefer-destructuring": 0,
+		"no-restricted-globals": [
+			"error",
+			"event",
+			"fdescribe"
+		],
+		"template-curly-spacing": 0,
+		"no-console": [
+			"error",
+			{
+				"allow": [
+					"debug",
+					"table"
+				]
+			}
+		],
+		"max-len": [
+			"error",
+			1000
+		],
+		"react/jsx-uses-react": "off",
+		"react/react-in-jsx-scope": "off",
+		"react/jsx-filename-extension": [
+			"error",
+			{
+				"extensions": [
+					".js",
+					".jsx"
+				]
+			}
+		],
+		"arrow-body-style": "off",
+		"react/jsx-one-expression-per-line": "off",
+		"indent": [
+			2,
+			"tab",
+			{
+				"SwitchCase": 1,
+				"VariableDeclarator": 1
+			}
+		],
+		"react/prop-types": 0,
+		"react/jsx-indent": [
+			2,
+			"tab"
+		],
+		"react/jsx-indent-props": [
+			2,
+			"tab"
+		],
+		"import/no-extraneous-dependencies": [
+			"error",
+			{
+				"devDependencies": true
+			}
+		]
+	}
+}

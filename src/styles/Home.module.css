@@ -1,3 +1,9 @@
+.test {
+	background: cyan;
+	font-size: 2em;
+	font-weight: 900;
+}
+
 .main {
   display: flex;
   flex-direction: column;
