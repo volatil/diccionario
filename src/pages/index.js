@@ -1,25 +1,34 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 // import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-// import buscador from "../helpers/helpers";
-import buscador from "@/helpers/helpers";
+import { elconsole, trayendo } from "@/helpers/helpers";
 
 // const inter = Inter({ subsets: ["latin"] });
 
 export async function getServerSideProps() {
 	const res = await fetch("https://es.wikipedia.org/w/api.php?action=query&prop=extracts&exlimit=1&titles=pizza&explaintext=1&exsectionformat=plain&format=json&lang=es");
-	// const res = await fetch("https://jsonplaceholder.typicode.com/todos");
 	const data = await res.json();
+
+	const testdefinicion = data.query.pages[Object.keys(data.query.pages)].extract;
 
 	return {
 		props: {
 			todos: data,
+			testdefinicion,
 		},
 	};
 }
 
-export default function Home({ todos }) {
+export default function Home({ todos, testdefinicion }) {
+	const [palabra, setpalabra] = useState();
+	const [definicion, setdefinicion] = useState();
+
+	useEffect(() => {
+
+	}, []);
+
 	return (
 		<>
 			<Head>
@@ -29,21 +38,27 @@ export default function Home({ todos }) {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 
-			<section id="buscador">
-				<h1 className={styles.test}>titulo</h1>
-				<input type="text" onChange={(evt) => { buscador( evt.target.value ); }} />
-				{todos?.length === 0 ? (
-					<div>Loading ...</div>
-				) : (
-					// todos?.map((todo) => (
-					// 	<div key={todo.id}>{todo.title}</div>
-					// ))
-					<div>si</div>
-				)}
-				{/* {console.debug( todos )} */}
-				{console.debug( todos.query.pages )}
+			<section id={styles.buscador}>
+				<h1 className={styles.palabraBuscada}>
+					{ palabra && <span className={styles.arrowright} /> }
+					<span>{palabra}</span>
+				</h1>
+				<div className={styles.contenedor}>
+					<input
+						className={styles.inputbuscar}
+						type="text"
+						onChange={(evt) => {
+							setpalabra(evt.target.value);
+							// elconsole(evt.target.value);
+							// trayendo(evt.target.value);
+							// leimprimi(evt.target.value);
+							// setdefinicion(leimprimi(evt.target.value));
+						}}
+					/>
+					<button className={styles.botonBuscar} type="button" onClick={elconsole(palabra)}>BUSCAR</button>
+				</div>
+				<p className={styles.definicion}>{ definicion }</p>
 			</section>
-
 		</>
 	);
 }
