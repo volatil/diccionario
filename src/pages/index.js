@@ -24,9 +24,9 @@ import styles from "@/styles/Home.module.css";
 function Significado(props) {
 	const { estado } = props;
 	return (
-		<div style={{ display: "flex", alignItems: "flex-start" }} className="significado">
+		<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }} className="significado">
 			<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
-			{ estado ? <p>{estado}</p> : <p>...</p> }
+			{ estado ? <p style={{ letterSpacing: "0.05em" }}>{estado}</p> : <p>...</p> }
 		</div>
 	);
 }
@@ -64,7 +64,7 @@ export default function Home() {
 			<section id={styles.buscador}>
 				<h1 className={styles.palabraBuscada}>
 					{ palabra && <span className={styles.arrowright} /> }
-					<span>{palabra}</span>
+					<span style={{ fontSize: "3em" }}>{palabra}</span>
 				</h1>
 				<div className={styles.contenedor}>
 					<input
@@ -76,11 +76,6 @@ export default function Home() {
 					/>
 					<button className={styles.botonBuscar} type="button" onClick={() => { callAPIreloaded(palabra); }}>BUSCAR</button>
 				</div>
-				<br />
-				<br />
-				{/* <Significado estado={definicion} /> */}
-				<br />
-				<br />
 				<Significado estado={definicion} />
 			</section>
 		</>
