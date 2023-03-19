@@ -1,6 +1,7 @@
 #buscador {
 	width: 600px;
 	margin: 100px auto 0;
+	padding-bottom: 120px;
 }
 .palabraBuscada {
 	color: white;

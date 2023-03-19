@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 // import Image from "next/image";
 // import { Inter } from "next/font/google";
-// import { elconsole, callAPI } from "@/helpers/helpers";
+import { mododarkmode } from "@/helpers/helpers";
 import styles from "@/styles/Home.module.css";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -24,9 +24,25 @@ import styles from "@/styles/Home.module.css";
 function Significado(props) {
 	const { estado } = props;
 	return (
-		<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }} className="significado">
-			<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
-			{ estado ? <p style={{ letterSpacing: "0.05em" }}>{estado}</p> : <p>...</p> }
+		<div className="significado">
+			{
+				estado
+					? (
+						estado.map((significado) => {
+							return (
+								<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
+									<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
+									<p key={significado}>{significado}</p>
+								</div>
+							);
+						})
+					) : (
+						<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
+							<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
+							<p>...</p>
+						</div>
+					)
+			}
 		</div>
 	);
 }
@@ -34,6 +50,7 @@ function Significado(props) {
 export default function Home() {
 	const [palabra, setpalabra] = useState();
 	const [definicion, setdefinicion] = useState();
+	const [darkmode, setdarkmode] = useState("desactivado");
 
 	const callAPIreloaded = async (lapalabra) => {
 		try {
@@ -41,11 +58,14 @@ export default function Home() {
 				`https://api.dictionaryapi.dev/api/v2/entries/en/${lapalabra}`,
 			);
 			const data = await res.json();
-			const significado = data[0].meanings[0].definitions[0].definition;
-			const test = data[0].meanings[0].definitions;
-			console.debug(significado);
-			console.debug(test);
-			setdefinicion(significado);
+
+			const todoslossignificados = data[0].meanings[0].definitions;
+			const lossignificadosarray = [];
+			for ( let count = 0; count <= todoslossignificados.length - 1; count++ ) {
+				const elsigni = data[0].meanings[0].definitions[count].definition;
+				lossignificadosarray.push( elsigni );
+			}
+			setdefinicion(lossignificadosarray);
 		} catch (err) {
 			console.debug("ERROOOOOOOOR !");
 			console.debug(err);
@@ -60,6 +80,27 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+
+			<button
+				style={{ cursor: "pointer" }}
+				type="button"
+				className="activadarkmode"
+				onClick={
+					/* eslint-disable */
+					() => {
+						darkmode === "activado"
+							? (
+								mododarkmode("desactivar"),
+								setdarkmode("desactivado")
+							) : (
+								mododarkmode("activar"),
+								setdarkmode("activado")
+							);
+					}
+					/* eslintr-enable */
+				}
+			>Activar Darkmode
+			</button>
 
 			<section id={styles.buscador}>
 				<h1 className={styles.palabraBuscada}>
