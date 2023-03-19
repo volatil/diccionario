@@ -25,8 +25,20 @@ export default function Home({ todos, testdefinicion }) {
 	const [palabra, setpalabra] = useState();
 	const [definicion, setdefinicion] = useState();
 
-	useEffect(() => {
-	}, []);
+	const callAPIreloaded = async (lapalabra) => {
+		console.debug( lapalabra );
+		try {
+			const res = await fetch(
+				`https://api.dictionaryapi.dev/api/v2/entries/en/${lapalabra}`,
+			);
+			const data = await res.json();
+			const frase = data[0].meanings[0].definitions[0].definition;
+			console.debug(frase);
+			setdefinicion(frase);
+		} catch (err) {
+			console.debug(err);
+		}
+	};
 
 	return (
 		<>
@@ -48,17 +60,11 @@ export default function Home({ todos, testdefinicion }) {
 						type="text"
 						onChange={(evt) => {
 							setpalabra(evt.target.value);
-							callAPI(evt.target.value);
-							const signi = callAPI(evt.target.value);
-							const ela = { muero: signi };
-							setdefinicion(ela);
-							/*
-							*/
 						}}
 					/>
-					<button className={styles.botonBuscar} type="button" onClick={elconsole(palabra)}>BUSCAR</button>
+					<button className={styles.botonBuscar} type="button" onClick={() => { callAPIreloaded(palabra); }}>BUSCAR</button>
 				</div>
-				<p className={styles.definicion}>{ definicion ? `si ${console.debug(definicion.muero)}` : "no" }</p>
+				<p className={styles.definicion}>{ definicion || "NO" }</p>
 			</section>
 		</>
 	);

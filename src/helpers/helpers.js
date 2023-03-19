@@ -65,3 +65,17 @@ export const callAPI = async function (buscado) {
 		return err;
 	}
 };
+
+export const callAPIreloaded = async function () {
+	try {
+		const res = await fetch(
+			"https://api.dictionaryapi.dev/api/v2/entries/en/pizza",
+		);
+		const data = await res.json();
+		const frase = data[0].meanings[0].definitions[0].definition;
+		console.debug(frase);
+		return frase;
+	} catch (err) {
+		console.debug(err);
+	}
+};
