@@ -29,11 +29,24 @@ function Significado(props) {
 				estado
 					? (
 						estado.map((significado) => {
+							console.debug( significado );
+							const {
+								audio, pronunciacion,
+							} = significado;
 							return (
-								<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
-									<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
-									<p key={significado}>{significado}</p>
-								</div>
+								<ul key={audio} style={{ marginTop: "20px" }}>
+									<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
+										<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
+										<strong style={{ marginRight: "10px" }}>DEF.</strong>{pronunciacion}
+									</li>
+									<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
+										<strong style={{ marginRight: "10px" }}>EJEM.</strong>
+										<audio controls>
+											<track kind="captions" />
+											<source src={audio} />
+										</audio>
+									</li>
+								</ul>
 							);
 						})
 					) : (
@@ -47,6 +60,16 @@ function Significado(props) {
 	);
 }
 
+function Titulo(props) {
+	const { estado } = props;
+	return (
+		<h1 className={styles.palabraBuscada}>
+			{ estado && <span className={styles.arrowright} /> }
+			<span style={{ fontSize: "3em" }}>{estado}</span>
+		</h1>
+	);
+}
+
 export default function Home() {
 	const [palabra, setpalabra] = useState();
 	const [definicion, setdefinicion] = useState();
@@ -54,18 +77,28 @@ export default function Home() {
 
 	const callAPIreloaded = async (lapalabra) => {
 		try {
-			const res = await fetch(
-				`https://api.dictionaryapi.dev/api/v2/entries/en/${lapalabra}`,
-			);
+			const api = `https://api.dictionaryapi.dev/api/v2/entries/en/${lapalabra}`;
+			const res = await fetch( api );
 			const data = await res.json();
+			// console.debug( data );
+			// console.debug( data[0].phonetics );
 
-			const todoslossignificados = data[0].meanings[0].definitions;
-			const lossignificadosarray = [];
-			for ( let count = 0; count <= todoslossignificados.length - 1; count++ ) {
-				const elsigni = data[0].meanings[0].definitions[count].definition;
-				lossignificadosarray.push( elsigni );
+			const todo = [];
+			// AGREGA FONETICA
+			for ( let count = 0; count <= data[0].phonetics.length - 1; count++ ) {
+				const ladata = {
+					audio: data[0].phonetics[count].audio,
+					pronunciacion: data[0].phonetics[count].text,
+				};
+				todo.push({
+					audio: data[0].phonetics[count].audio,
+					pronunciacion: data[0].phonetics[count].text,
+				});
 			}
-			setdefinicion(lossignificadosarray);
+
+			// TEST lo pusheado al array
+			console.debug( todo );
+			setdefinicion(todo);
 		} catch (err) {
 			console.debug("ERROOOOOOOOR !");
 			console.debug(err);
@@ -103,10 +136,7 @@ export default function Home() {
 			</button>
 
 			<section id={styles.buscador}>
-				<h1 className={styles.palabraBuscada}>
-					{ palabra && <span className={styles.arrowright} /> }
-					<span style={{ fontSize: "3em" }}>{palabra}</span>
-				</h1>
+				<Titulo estado={palabra} />
 				<div className={styles.contenedor}>
 					<input
 						className={styles.inputbuscar}
