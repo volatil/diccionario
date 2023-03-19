@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 // import Image from "next/image";
 // import { Inter } from "next/font/google";
-import { mododarkmode } from "@/helpers/helpers";
+import { mododarkmode, callAPIreloaded } from "@/helpers/helpers";
 import styles from "@/styles/Home.module.css";
 
 // const inter = Inter({ subsets: ["latin"] });
@@ -28,7 +28,8 @@ function Significado(props) {
 			{
 				estado
 					? (
-						estado.map((significado) => {
+						estado?.map((significado) => {
+							console.debug( "elsigni" );
 							console.debug( significado );
 							const {
 								audio, pronunciacion,
@@ -75,36 +76,6 @@ export default function Home() {
 	const [definicion, setdefinicion] = useState();
 	const [darkmode, setdarkmode] = useState("desactivado");
 
-	const callAPIreloaded = async (lapalabra) => {
-		try {
-			const api = `https://api.dictionaryapi.dev/api/v2/entries/en/${lapalabra}`;
-			const res = await fetch( api );
-			const data = await res.json();
-			// console.debug( data );
-			// console.debug( data[0].phonetics );
-
-			const todo = [];
-			// AGREGA FONETICA
-			for ( let count = 0; count <= data[0].phonetics.length - 1; count++ ) {
-				const ladata = {
-					audio: data[0].phonetics[count].audio,
-					pronunciacion: data[0].phonetics[count].text,
-				};
-				todo.push({
-					audio: data[0].phonetics[count].audio,
-					pronunciacion: data[0].phonetics[count].text,
-				});
-			}
-
-			// TEST lo pusheado al array
-			console.debug( todo );
-			setdefinicion(todo);
-		} catch (err) {
-			console.debug("ERROOOOOOOOR !");
-			console.debug(err);
-		}
-	};
-
 	return (
 		<>
 			<Head>
@@ -145,7 +116,15 @@ export default function Home() {
 							setpalabra(evt.target.value);
 						}}
 					/>
-					<button className={styles.botonBuscar} type="button" onClick={() => { callAPIreloaded(palabra); }}>BUSCAR</button>
+					<button className={styles.botonBuscar} type="button" onClick={
+						async () => {
+							const respuesta = await callAPIreloaded(palabra);
+							console.debug( `traje respuesta` );
+							console.debug( respuesta );
+							console.debug( `fin respuesta` );
+							setdefinicion(respuesta);
+						}
+					}>BUSCAR</button>
 				</div>
 				<Significado estado={definicion} />
 			</section>

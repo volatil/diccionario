@@ -13,3 +13,28 @@ export function mododarkmode(estado) {
 		miHTML2.classList.remove("darkmode");
 	}
 }
+
+export const callAPIreloaded = async function (lapalabra) {
+	const api = `https://api.dictionaryapi.dev/api/v2/entries/en/${lapalabra}`;
+	const res = await fetch( api );
+	const data = await res.json();
+	// console.debug( data );
+	// console.debug( data[0].phonetics );
+
+	const todo = [];
+	// AGREGA FONETICA
+	for ( let count = 0; count <= data[0].phonetics.length - 1; count++ ) {
+		const ladata = {
+			audio: data[0].phonetics[count].audio,
+			pronunciacion: data[0].phonetics[count].text,
+		};
+		todo.push({
+			audio: data[0].phonetics[count].audio,
+			pronunciacion: data[0].phonetics[count].text,
+		});
+	}
+
+	// TEST lo pusheado al array
+	console.debug( todo );
+	return todo;
+};
