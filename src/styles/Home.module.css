@@ -27,6 +27,7 @@ span.arrowright {
 .inputbuscar {
 	height: 100%;
 	width: 100%;
+	padding: 0 10px;
 }
 .botonBuscar {
 	background-color: #673AB7;

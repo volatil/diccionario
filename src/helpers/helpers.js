@@ -1,16 +1,12 @@
-export const asdasd = function () {
-	// asdasd
-};
-
 export function mododarkmode(estado) {
 	if ( estado === "activar" ) {
-		console.debug( "activando ..." );
 		const miHTML2 = document.querySelector("html");
 		miHTML2.classList.add("darkmode");
+		localStorage.setItem("diccionario_darkmode", "activado");
 	} else {
-		console.debug( "desactivando ..." );
 		const miHTML2 = document.querySelector("html");
 		miHTML2.classList.remove("darkmode");
+		localStorage.setItem("diccionario_darkmode", "desactivado");
 	}
 }
 
@@ -25,10 +21,6 @@ export const callAPIreloaded = async function (lapalabra) {
 	const todo = [];
 	// AGREGA FONETICA
 	for ( let count = 0; count <= data[0].phonetics.length - 1; count++ ) {
-		const ladata = {
-			audio: data[0].phonetics[count].audio,
-			pronunciacion: data[0].phonetics[count].text,
-		};
 		todo.push({
 			audio: data[0].phonetics[count].audio,
 			pronunciacion: data[0].phonetics[count].text,

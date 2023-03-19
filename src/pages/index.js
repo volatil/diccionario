@@ -68,6 +68,21 @@ function Titulo(props) {
 
 function Darkmode() {
 	const [darkmode, setdarkmode] = useState("desactivado");
+
+	useEffect(() => {
+		if ( localStorage.getItem("diccionario_darkmode") ) {
+			if ( localStorage.getItem("diccionario_darkmode") === "activado" ) {
+				mododarkmode("activar");
+				setdarkmode("activado");
+			} else {
+				mododarkmode("desactivar");
+				setdarkmode("desactivado");
+			}
+		} else {
+			localStorage.setItem("diccionario_darkmode", "desactivado");
+		}
+	}, []);
+
 	return (
 		<button
 			style={{ cursor: "pointer" }}
@@ -101,6 +116,7 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
+
 			<Darkmode />
 
 			<main id={styles.buscador}>
