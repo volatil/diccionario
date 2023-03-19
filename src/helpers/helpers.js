@@ -18,8 +18,9 @@ export const callAPIreloaded = async function (lapalabra) {
 	const api = `https://api.dictionaryapi.dev/api/v2/entries/en/${lapalabra}`;
 	const res = await fetch( api );
 	const data = await res.json();
-	// console.debug( data );
-	// console.debug( data[0].phonetics );
+	if ( data.title ) {
+		return false;
+	}
 
 	const todo = [];
 	// AGREGA FONETICA
