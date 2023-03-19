@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 // import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import { elconsole, trayendo } from "@/helpers/helpers";
+import { elconsole, callAPI } from "@/helpers/helpers";
 
 // const inter = Inter({ subsets: ["latin"] });
 
@@ -26,7 +26,6 @@ export default function Home({ todos, testdefinicion }) {
 	const [definicion, setdefinicion] = useState();
 
 	useEffect(() => {
-
 	}, []);
 
 	return (
@@ -49,15 +48,17 @@ export default function Home({ todos, testdefinicion }) {
 						type="text"
 						onChange={(evt) => {
 							setpalabra(evt.target.value);
-							// elconsole(evt.target.value);
-							// trayendo(evt.target.value);
-							// leimprimi(evt.target.value);
-							// setdefinicion(leimprimi(evt.target.value));
+							callAPI(evt.target.value);
+							const signi = callAPI(evt.target.value);
+							const ela = { muero: signi };
+							setdefinicion(ela);
+							/*
+							*/
 						}}
 					/>
 					<button className={styles.botonBuscar} type="button" onClick={elconsole(palabra)}>BUSCAR</button>
 				</div>
-				<p className={styles.definicion}>{ definicion }</p>
+				<p className={styles.definicion}>{ definicion ? `si ${console.debug(definicion.muero)}` : "no" }</p>
 			</section>
 		</>
 	);
