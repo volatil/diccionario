@@ -1,13 +1,14 @@
 export function mododarkmode(estado) {
-	if ( estado === "activar" ) {
-		const miHTML2 = document.querySelector("html");
-		miHTML2.classList.add("darkmode");
-		localStorage.setItem("diccionario_darkmode", "activado");
-	} else {
-		const miHTML2 = document.querySelector("html");
-		miHTML2.classList.remove("darkmode");
-		localStorage.setItem("diccionario_darkmode", "desactivado");
-	}
+	console.debug( "me desactivaste pelotudo !" );
+	// if ( estado === "activar" ) {
+	// 	const miHTML2 = document.querySelector("html");
+	// 	miHTML2.classList.add("darkmode");
+	// 	localStorage.setItem("diccionario_darkmode", "activado");
+	// } else {
+	// 	const miHTML2 = document.querySelector("html");
+	// 	miHTML2.classList.remove("darkmode");
+	// 	localStorage.setItem("diccionario_darkmode", "desactivado");
+	// }
 }
 
 export const callAPIreloaded = async function (lapalabra) {

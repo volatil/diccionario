@@ -1,0 +1,47 @@
+button#darkmode {
+	display: flex;
+	background: none;
+	border: none;
+	width: 100px;
+	float: right;
+	margin: 20px 5px 0px 0px;
+}
+.fakeINPUT.activado {
+	width: 60px;
+	height: 30px;
+	background: var(--morado);
+	border-radius: 20px;
+	position: relative;
+}
+.fakeINPUT.desactivado {
+	width: 60px;
+	height: 30px;
+	background: var(--grisOscuro);
+	border-radius: 20px;
+	position: relative;
+}
+.circulo.activado {
+	background: white;
+	display: block;
+	border-radius: 50%;
+	position: relative;
+	top: 8%;
+	right: -32px;
+	width: 43%;
+	height: 86%;
+}
+.circulo.desactivado {
+	background: white;
+	width: 25px;
+	height: 25px;
+	display: block;
+	border-radius: 50%;
+	position: relative;
+	top: 2px;
+	left: 5px;
+}
+.isotipo {
+	position: relative;
+	width: 20px;
+	margin: 4px 10px 10px 10px;
+}

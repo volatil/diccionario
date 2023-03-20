@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 // import Image from "next/image";
 // import { Inter } from "next/font/google";
-import { mododarkmode, callAPIreloaded } from "@/helpers/helpers";
-import estilo from "@/styles/Home.module.css";
+import { callAPIreloaded } from "@/helpers/helpers";
+import Darkmode from "@/components/darkmode/Darkmode";
 
 function Significado(props) {
 	const { estado } = props;
@@ -93,43 +93,6 @@ function Titulo(props) {
 			{ estado && <span className="arrowright" /> }
 			<span className="texto">{estado}</span>
 		</h1>
-	);
-}
-
-function Darkmode() {
-	const [darkmode, setdarkmode] = useState("desactivado");
-
-	useEffect(() => {
-		if ( localStorage.getItem("diccionario_darkmode") ) {
-			if ( localStorage.getItem("diccionario_darkmode") === "activado" ) {
-				mododarkmode("activar");
-				setdarkmode("activado");
-			} else {
-				mododarkmode("desactivar");
-				setdarkmode("desactivado");
-			}
-		} else {
-			localStorage.setItem("diccionario_darkmode", "desactivado");
-		}
-	}, []);
-
-	return (
-		<button
-			id="darkmode"
-			type="button"
-			onClick={
-				() => {
-					if ( darkmode === "activado" ) {
-						mododarkmode("desactivar");
-						setdarkmode("desactivado");
-					} else {
-						mododarkmode("activar");
-						setdarkmode("activado");
-					}
-				}
-			}
-		>Activar Darkmode
-		</button>
 	);
 }
 
