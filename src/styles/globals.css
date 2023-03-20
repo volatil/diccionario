@@ -91,7 +91,7 @@ body {
 
 body {
 	color: rgb(var(--foreground-rgb));
-	background-color: #171717;
+	/* background-color: #171717; */
 	/* background: linear-gradient(
 	to bottom,
 	transparent,
@@ -105,12 +105,17 @@ a {
 	text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
 	html {
 		color-scheme: dark;
 	}
-}
+} */
 
-.darkmode {
+/* .darkmode {
 	filter: invert(1);
+} */
+
+
+body.darkmode {
+	background-color: #050505;
 }

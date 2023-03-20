@@ -1,5 +1,15 @@
 export function mododarkmode(estado) {
 	console.debug( "me desactivaste pelotudo !" );
+
+	if ( estado === "activar" ) {
+		const cambioOSCURO = document.querySelector("body");
+		cambioOSCURO.classList.add("darkmode");
+		localStorage.setItem("diccionario_darkmode", "activado");
+	} else {
+		const cambioOSCURO = document.querySelector("body");
+		cambioOSCURO.classList.remove("darkmode");
+		localStorage.setItem("diccionario_darkmode", "desactivado");
+	}
 	// if ( estado === "activar" ) {
 	// 	const miHTML2 = document.querySelector("html");
 	// 	miHTML2.classList.add("darkmode");

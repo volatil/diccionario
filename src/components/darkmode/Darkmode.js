@@ -21,10 +21,10 @@ function Darkmode() {
 
 	return (
 		<button id={css.darkmode} type="button" onClick={() => { if ( darkmode === "activado" ) { mododarkmode("desactivar"); setdarkmode("desactivado"); } else { mododarkmode("activar"); setdarkmode("activado"); } }}>
-			<div className={darkmode === "activado" ? `${css.fakeINPUT} ${css.desactivado}` : `${css.fakeINPUT} ${css.activado}`}>
-				<span className={darkmode === "activado" ? `${css.circulo} ${css.desactivado}` : `${css.circulo} ${css.activado}`} />
+			<div className={darkmode === "activado" ? `${css.fakeINPUT} ${css.activado}` : `${css.fakeINPUT} ${css.desactivado}`}>
+				<span className={darkmode === "activado" ? `${css.circulo} ${css.activado}` : `${css.circulo} ${css.desactivado}`} />
 			</div>
-			<img className={css.isotipo} src={darkmode === "activado" ? "/assets/svg/darkmode_sun.svg" : "/assets/svg/darkmode_moon.svg"} alt="definicion" />
+			<img className={css.isotipo} src={darkmode === "activado" ? "/assets/svg/darkmode_moon.svg" : "/assets/svg/darkmode_sun.svg"} alt="definicion" />
 		</button>
 	);
 }
