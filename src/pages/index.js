@@ -4,10 +4,11 @@ import Head from "next/head";
 // import { Inter } from "next/font/google";
 import { callAPIreloaded } from "@/helpers/helpers";
 import Darkmode from "@/components/darkmode/Darkmode";
+import Buscador from "@/components/buscador/Buscador";
+import css from "@/styles/Home.module.css";
 
 function Significado(props) {
 	const { estado } = props;
-	// console.debug( estado );
 	if ( typeof estado === "boolean" ) {
 		return (
 			<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
@@ -86,18 +87,7 @@ function Significado(props) {
 	);
 }
 
-function Titulo(props) {
-	const { estado } = props;
-	return (
-		<h1 className="palabraBuscada">
-			{ estado && <span className="arrowright" /> }
-			<span className="texto">{estado}</span>
-		</h1>
-	);
-}
-
 export default function Home() {
-	const [palabra, setpalabra] = useState();
 	const [definicion, setdefinicion] = useState();
 
 	return (
@@ -111,15 +101,12 @@ export default function Home() {
 
 			<Darkmode />
 
-			<main id="buscador">
-				<Titulo estado={palabra} />
-				<div className="contenedor">
-					<input className="inputbuscar" type="text" onChange={(evt) => { setpalabra(evt.target.value); }} />
-					<button className="botonBuscar" type="button" onClick={async () => { const respuesta = await callAPIreloaded(palabra); setdefinicion(respuesta); }}>BUSCAR </button>
-				</div>
+			<main>
+				<Buscador>
+					<button className="botonBuscar" type="button" onClick={async () => { const palabra = document.querySelector(".inputbuscar").value; const respuesta = await callAPIreloaded(palabra); setdefinicion(respuesta); }}>BUSCAR</button>
+				</Buscador>
 
 				<Significado estado={definicion} />
-
 			</main>
 		</>
 	);

@@ -115,7 +115,11 @@ a {
 	filter: invert(1);
 } */
 
-
+main {
+	width: 90%;
+	margin: 0 auto;
+	padding-bottom: 120px;
+}
 body.darkmode {
 	background-color: #050505;
 }
