@@ -24,10 +24,13 @@ export const callAPIreloaded = async function (lapalabra) {
 		todo.push({
 			audio: data[0].phonetics[count].audio,
 			pronunciacion: data[0].phonetics[count].text,
+			definicion: data[0].meanings[0].definitions[count].definition,
+			ejemplo: data[0].meanings[0].definitions[count].example,
+			sinonimos: data[0].meanings[0].synonyms[count],
 		});
 	}
 
 	// TEST lo pusheado al array
-	console.debug( todo );
+	// console.debug( todo );
 	return todo;
 };

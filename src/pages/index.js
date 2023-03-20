@@ -3,10 +3,11 @@ import Head from "next/head";
 // import Image from "next/image";
 // import { Inter } from "next/font/google";
 import { mododarkmode, callAPIreloaded } from "@/helpers/helpers";
-import styles from "@/styles/Home.module.css";
+import estilo from "@/styles/Home.module.css";
 
 function Significado(props) {
 	const { estado } = props;
+	// console.debug( estado );
 	if ( typeof estado === "boolean" ) {
 		return (
 			<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
@@ -15,43 +16,72 @@ function Significado(props) {
 			</div>
 		);
 	}
+
 	return (
 		<div className="significado">
-			{
-				estado
-					? (
-						estado?.map((significado) => {
-							const {
-								audio, pronunciacion,
-							} = significado;
+			<div className="pronunciacion">
+				{
+					estado
+						? (
+							estado?.map((elsigni) => {
+								const key = elsigni.pronunciacion + elsigni.definicion;
+								const { audio, pronunciacion } = elsigni;
+								return (
+									<ul data-key={key} key={key} style={{ marginTop: "20px" }}>
+										<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
+											<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
+											<strong style={{ marginRight: "10px" }}>PRONUN.</strong>{pronunciacion}
+										</li>
+										{
+											audio
+												&& (
+													<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
+														<strong style={{ marginRight: "10px" }}>EJEM.</strong>
+														<audio controls>
+															<track kind="captions" />
+															<source src={audio} />
+														</audio>
+													</li>
+												)
+										}
+									</ul>
+								);
+							})
+						) : (
+							<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
+								<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
+								<p>...</p>
+							</div>
+						)
+				}
+			</div>
+			<div className="sinonimos">
+				<p>Sinonimos:{" "}
+					{
+						estado?.map((elsinon) => {
+							const { sinonimos } = elsinon;
 							return (
-								<ul key={pronunciacion} style={{ marginTop: "20px" }}>
-									<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
-										<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
-										<sterong style={{ marginRight: "10px" }}>DEF.</sterong>{pronunciacion}
-									</li>
-									{
-										audio
-											&& (
-												<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
-													<strong style={{ marginRight: "10px" }}>EJEM.</strong>
-													<audio controls>
-														<track kind="captions" />
-														<source src={audio} />
-													</audio>
-												</li>
-											)
-									}
+								<span key={sinonimos}>{sinonimos}</span>
+							);
+						})
+					}
+				</p>
+			</div>
+			<div className="definicion" style={{ marginTop: "20px" }}>
+				{
+					estado
+						&& estado.map((ladef, index) => {
+							const key = index + ladef.pronunciacion + ladef.definicion;
+							const { definicion, ejemplo } = ladef;
+							return (
+								<ul data-key={key} key={key} style={{ marginBottom: "20px" }}>
+									<li>{definicion}</li>
+									<span style={{ color: "#a7a7a7", marginTop: "10px", display: "block" }}>{ejemplo}</span>
 								</ul>
 							);
 						})
-					) : (
-						<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
-							<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
-							<p>...</p>
-						</div>
-					)
-			}
+				}
+			</div>
 		</div>
 	);
 }
@@ -59,9 +89,9 @@ function Significado(props) {
 function Titulo(props) {
 	const { estado } = props;
 	return (
-		<h1 className={styles.palabraBuscada}>
-			{ estado && <span className={styles.arrowright} /> }
-			<span style={{ fontSize: "3em" }}>{estado}</span>
+		<h1 className="palabraBuscada">
+			{ estado && <span className="arrowright" /> }
+			<span className="texto">{estado}</span>
 		</h1>
 	);
 }
@@ -85,9 +115,8 @@ function Darkmode() {
 
 	return (
 		<button
-			style={{ cursor: "pointer" }}
+			id="darkmode"
 			type="button"
-			className="activadarkmode"
 			onClick={
 				() => {
 					if ( darkmode === "activado" ) {
@@ -119,29 +148,15 @@ export default function Home() {
 
 			<Darkmode />
 
-			<main id={styles.buscador}>
+			<main id="buscador">
 				<Titulo estado={palabra} />
-				<div className={styles.contenedor}>
-					<input
-						className={styles.inputbuscar}
-						type="text"
-						onChange={(evt) => {
-							setpalabra(evt.target.value);
-						}}
-					/>
-					<button
-						className={styles.botonBuscar}
-						type="button"
-						onClick={
-							async () => {
-								const respuesta = await callAPIreloaded(palabra);
-								setdefinicion(respuesta);
-							}
-						}
-					>BUSCAR
-					</button>
+				<div className="contenedor">
+					<input className="inputbuscar" type="text" onChange={(evt) => { setpalabra(evt.target.value); }} />
+					<button className="botonBuscar" type="button" onClick={async () => { const respuesta = await callAPIreloaded(palabra); setdefinicion(respuesta); }}>BUSCAR </button>
 				</div>
+
 				<Significado estado={definicion} />
+
 			</main>
 		</>
 	);
