@@ -3,11 +3,11 @@ import { mododarkmode } from "@/helpers/helpers";
 import css from "@/styles/Darkmode.module.css";
 
 export default function Darkmode() {
-	const [darkmode, setdarkmode] = useState("desactivado");
+	const [darkmode, setdarkmode] = useState("activado");
 
 	useEffect(() => {
 		if ( localStorage.getItem("diccionario_darkmode") ) {
-			if ( localStorage.getItem("diccionario_darkmode") === "activado" ) {
+			if ( localStorage.getItem("diccionario_darkmode") === "desactivado" ) {
 				mododarkmode("activar");
 				setdarkmode("activado");
 			} else {
@@ -15,7 +15,7 @@ export default function Darkmode() {
 				setdarkmode("desactivado");
 			}
 		} else {
-			localStorage.setItem("diccionario_darkmode", "desactivado");
+			localStorage.setItem("diccionario_darkmode", "activado");
 		}
 	}, []);
 

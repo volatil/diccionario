@@ -1,5 +1,5 @@
 export function mododarkmode(estado) {
-	if ( estado === "activar" ) {
+	if ( estado === "desactivar" ) {
 		const cambioOSCURO = document.querySelector("body");
 		cambioOSCURO.classList.add("darkmode");
 		localStorage.setItem("diccionario_darkmode", "activado");
