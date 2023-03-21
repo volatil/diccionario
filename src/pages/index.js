@@ -13,16 +13,6 @@ function Significado(props) {
 	const { estado } = props;
 
 	if ( estado ) {
-		// si no hay estado imprime mensaje default
-		if ( typeof estado === "boolean" ) {
-			return (
-				<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
-					<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
-					<p>No se encontraron definiciones</p>
-				</div>
-			);
-		}
-
 		// // LOS SINONIMOS
 		let arrSinonimos = [];
 		if ( estado ) {
@@ -102,6 +92,7 @@ function Significado(props) {
 			</div>
 		);
 	}
+
 	return (
 		<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
 			<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
