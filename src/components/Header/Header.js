@@ -1,4 +1,4 @@
-import Darkmode from "@/components/Darkmode/Darkmode";
+import Darkmode from "../Darkmode/Darkmode";
 import css from "../../styles/Header.module.css";
 
 function Header() {
