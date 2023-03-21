@@ -1,4 +1,9 @@
-<!-- npm install -D eslint-config-react-app -->
+<!--
+npm install -D eslint-config-react-app
+-->
+
+### DICCIONARIO
+URL Deploy: [Link](https://641938f0a8c1de0009efd85d--stellar-pony-8c6658.netlify.app/)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
