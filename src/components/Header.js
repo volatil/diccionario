@@ -1,5 +1,5 @@
-import Darkmode from "../Darkmode/Darkmode";
-import css from "../../styles/Header.module.css";
+import Darkmode from "./Darkmode";
+import css from "../styles/Header.module.css";
 
 function Header() {
 	return (

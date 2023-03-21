@@ -3,8 +3,8 @@ import Head from "next/head";
 // import Image from "next/image";
 // import { Inter } from "next/font/google";
 import { callAPIreloaded } from "@/helpers/helpers";
-import Header from "@/components/Header/Header";
-import Buscador from "@/components/Buscador/Buscador";
+import Header from "@/components/Header";
+import Buscador from "@/components/Buscador";
 
 import cssBuscador from "@/styles/Buscador.module.css";
 import cssSigni from "@/styles/Significado.module.css";
