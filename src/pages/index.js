@@ -3,12 +3,17 @@ import Head from "next/head";
 // import Image from "next/image";
 // import { Inter } from "next/font/google";
 import { callAPIreloaded } from "@/helpers/helpers";
-import Darkmode from "@/components/darkmode/Darkmode";
-import Buscador from "@/components/buscador/Buscador";
-import css from "@/styles/Home.module.css";
+// import Darkmode from "@/components/Darkmode/Darkmode";
+import Header from "@/components/Header/Header";
+import Buscador from "@/components/Buscador/Buscador";
+
+import css from "@/styles/Buscador.module.css";
+import cssSigni from "@/styles/Significado.module.css";
 
 function Significado(props) {
 	const { estado } = props;
+
+	// si no hay estado imprime mensaje default
 	if ( typeof estado === "boolean" ) {
 		return (
 			<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
@@ -16,6 +21,18 @@ function Significado(props) {
 				<p>No se encontraron definiciones</p>
 			</div>
 		);
+	}
+
+	// LOS SINONIMOS
+	let arrSinonimos = [];
+	if ( estado ) {
+		for ( let count = 0; count <= estado.length - 1; count++ ) {
+			const sinonimo = estado[count].sinonimos;
+			if ( sinonimo ) {
+				arrSinonimos.push(sinonimo);
+			}
+		}
+		arrSinonimos = [...new Set(arrSinonimos)];
 	}
 
 	return (
@@ -59,10 +76,9 @@ function Significado(props) {
 			<div className="sinonimos">
 				<p>Sinonimos:{" "}
 					{
-						estado?.map((elsinon) => {
-							const { sinonimos } = elsinon;
+						arrSinonimos?.map((elsinon) => {
 							return (
-								<span key={sinonimos}>{sinonimos}</span>
+								<span className={cssSigni.spanlossinonimos} key={elsinon}>{elsinon}</span>
 							);
 						})
 					}
@@ -98,12 +114,11 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-
-			<Darkmode />
-
 			<main>
+				<Header />
+
 				<Buscador>
-					<button className="botonBuscar" type="button" onClick={async () => { const palabra = document.querySelector(".inputbuscar").value; const respuesta = await callAPIreloaded(palabra); setdefinicion(respuesta); }}>BUSCAR</button>
+					<button className={css.botonBuscar} type="button" onClick={async () => { const palabra = document.querySelector("#inputBUSCADOR").value; const respuesta = await callAPIreloaded(palabra); setdefinicion(respuesta); }}>BUSCAR </button>
 				</Buscador>
 
 				<Significado estado={definicion} />

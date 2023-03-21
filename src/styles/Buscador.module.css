@@ -1,14 +1,14 @@
-#buscador .contenedor {
+#buscador {
 	height: 50px;
 	width: 100%;
 	display: flex;
 }
-#buscador .contenedor .inputbuscar {
+#buscador .inputbuscar {
 	height: 100%;
 	width: 100%;
 	padding: 0 10px;
 }
-#buscador .contenedor .botonBuscar {
+#buscador .botonBuscar {
 	background-color: #673AB7;
 	color: white;
 	height: 100%;
@@ -17,7 +17,7 @@
 	margin-left: 10px;
 	cursor: pointer;
 }
-#buscador .contenedor .botonBuscar:hover {
+#buscador .botonBuscar:hover {
 	background-color: #502799;
 	-webkit-transition: all 0.2s ease-out;
 	-moz-transition:    all 0.2s ease-out;

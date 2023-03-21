@@ -1,0 +1,6 @@
+.spanlossinonimos::after {
+	content:", "
+}
+.spanlossinonimos:last-of-type::after {
+	content:""
+}

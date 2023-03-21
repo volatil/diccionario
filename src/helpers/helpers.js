@@ -1,6 +1,4 @@
 export function mododarkmode(estado) {
-	console.debug( "me desactivaste pelotudo !" );
-
 	if ( estado === "activar" ) {
 		const cambioOSCURO = document.querySelector("body");
 		cambioOSCURO.classList.add("darkmode");
