@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { mododarkmode } from "@/helpers/helpers";
 import css from "@/styles/Darkmode.module.css";
 
-function Darkmode() {
+export default function Darkmode() {
 	const [darkmode, setdarkmode] = useState("desactivado");
 
 	useEffect(() => {
@@ -28,4 +28,3 @@ function Darkmode() {
 		</button>
 	);
 }
-export default Darkmode;

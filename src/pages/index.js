@@ -6,7 +6,7 @@ import { callAPIreloaded } from "@/helpers/helpers";
 import Header from "@/components/Header/Header";
 import Buscador from "@/components/Buscador/Buscador";
 
-import css from "@/styles/Buscador.module.css";
+import cssBuscador from "@/styles/Buscador.module.css";
 import cssSigni from "@/styles/Significado.module.css";
 
 function Significado(props) {
@@ -84,7 +84,7 @@ function Significado(props) {
 						}
 					</p>
 				</div>
-				<div className="definicion" style={{ marginTop: "20px" }}>
+				<div className="definicion" style={{ marginTop: "20px", letterSpacing: "0.05em" }}>
 					{
 						estado
 							&& estado.map((ladef, index) => {
@@ -125,7 +125,9 @@ export default function Home() {
 				<Header />
 
 				<Buscador>
-					<button className={css.botonBuscar} type="button" onClick={async () => { const palabra = document.querySelector("#inputBUSCADOR").value; const respuesta = await callAPIreloaded(palabra); setdefinicion(respuesta); }}>BUSCAR </button>
+					<button className={cssBuscador.botonBuscar} type="button" onClick={async () => { const palabra = document.querySelector("#inputBUSCADOR").value; const respuesta = await callAPIreloaded(palabra); setdefinicion(respuesta); }}>
+						<img className={cssBuscador.isotipo} src="/assets/svg/buscaricono.svg" alt="buscar" />
+					</button>
 				</Buscador>
 
 				<Significado estado={definicion} />

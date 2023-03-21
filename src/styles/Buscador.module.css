@@ -2,29 +2,31 @@
 	height: 50px;
 	width: 100%;
 	display: flex;
+	position: relative;
 }
 #buscador .inputbuscar {
 	height: 100%;
 	width: 100%;
-	padding: 0 10px;
+	padding: 0 50px 0 10px;
+	outline: none;
+	background-color: #ddd;
+	border-radius: 18px;
+	border: none;
+	font-family: times new roman, serif;
+	font-size: 1.7em;
 }
-#buscador .botonBuscar {
-	background-color: #673AB7;
-	color: white;
+#buscador button.botonBuscar {
+	background-color: white;
 	height: 100%;
 	border: none;
 	padding: 10px;
 	margin-left: 10px;
 	cursor: pointer;
+	position: absolute;
+	right: 0;
+	background: none;
 }
-#buscador .botonBuscar:hover {
-	background-color: #502799;
-	-webkit-transition: all 0.2s ease-out;
-	-moz-transition:    all 0.2s ease-out;
-	-o-transition:      all 0.2s ease-out;
-	transition:         all 0.2s ease-out;
-}
-#buscador .significado .definicion {
-	margin-top: 10px;
-	letter-spacing: 0.05em;
+.isotipo {
+	width: 30px;
+	height: 30px;
 }
