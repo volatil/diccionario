@@ -13,17 +13,22 @@ function Significado(props) {
 	const { estado } = props;
 
 	if ( estado ) {
-		// // LOS SINONIMOS
 		let arrSinonimos = [];
-		if ( estado ) {
-			for ( let count = 0; count <= estado.length - 1; count++ ) {
-				const sinonimo = estado[count].sinonimos;
-				if ( sinonimo ) {
-					arrSinonimos.push(sinonimo);
-				}
+		let arrDefinicion = [];
+		for ( let count = 0; count <= estado.length - 1; count++ ) {
+			const sinonimo = estado[count].sinonimos;
+			const definicion = estado[count].definicion;
+
+			if ( sinonimo ) {
+				arrSinonimos.push(sinonimo);
 			}
-			arrSinonimos = [...new Set(arrSinonimos)];
+			if ( definicion ) {
+				arrDefinicion.push(definicion);
+			}
 		}
+
+		arrSinonimos = [...new Set(arrSinonimos)];
+		arrDefinicion = [...new Set(arrDefinicion)];
 
 		return (
 			<div className="significado">
@@ -75,18 +80,15 @@ function Significado(props) {
 					</p>
 				</div>
 				<div className="definicion" style={{ marginTop: "20px", letterSpacing: "0.05em" }}>
+					<h2>DEFINICION</h2>
 					{
-						estado
-							&& estado.map((ladef, index) => {
-								const key = index + ladef.pronunciacion + ladef.definicion;
-								const { definicion, ejemplo } = ladef;
-								return (
-									<ul data-key={key} key={key} style={{ marginBottom: "20px" }}>
-										<li>{definicion}</li>
-										<span style={{ color: "#a7a7a7", marginTop: "10px", display: "block" }}>{ejemplo}</span>
-									</ul>
-								);
-							})
+						arrDefinicion.map((definicion, index) => {
+							return (
+								<ul data-key={definicion} key={definicion} style={{ marginBottom: "20px" }}>
+									<li>{definicion}</li>
+								</ul>
+							);
+						})
 					}
 				</div>
 			</div>
