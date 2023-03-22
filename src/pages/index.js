@@ -2,103 +2,12 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 // import Image from "next/image";
 // import { Inter } from "next/font/google";
-import { callAPIreloaded, playPronunciacion, play } from "@/helpers/helpers";
+import { callAPIreloaded } from "@/helpers/helpers";
 import Header from "@/components/Header";
 import Buscador from "@/components/Buscador";
+import Significado from "@/components/Significado";
 
 import cssBuscador from "@/styles/Buscador.module.css";
-import cssSigni from "@/styles/Significado.module.css";
-
-function Significado(props) {
-	const { estado } = props;
-
-	if ( estado ) {
-		const palabra = estado[0].word;
-		const pronunciacion = estado[0].pronunciacion;
-
-		let arrSinonimos = [];
-		let arrDefinicion = [];
-		let arrAudios = [];
-		for ( let count = 0; count <= estado.length - 1; count++ ) {
-			const sinonimo = estado[count].sinonimos;
-			const definicion = estado[count].definicion;
-			const audio = 	estado[count].audio;
-
-			if ( sinonimo ) {
-				arrSinonimos.push(sinonimo);
-			}
-			if ( definicion ) {
-				arrDefinicion.push(definicion);
-			}
-			if ( audio ) {
-				arrAudios.push(audio);
-			}
-		}
-
-		arrSinonimos = [...new Set(arrSinonimos)];
-		arrDefinicion = [...new Set(arrDefinicion)];
-		arrAudios = [...new Set(arrAudios)];
-
-		return (
-			<div className="significado">
-				<div className={cssSigni.audioCajita}>
-					<div>
-						<h2 className={cssSigni.palabraBuscada}>{palabra}</h2>
-						<p className={cssSigni.pronunciacion}>{pronunciacion}</p>
-					</div>
-					<div className={cssSigni.ladoAudio}>
-						<button className={cssSigni.botonReproduceAudio} type="button" onClick={() => { playPronunciacion(); }}>
-							<img src="assets/svg/audio.svg" alt="reproducir audio" />
-						</button>
-						<audio id="elaudio" key={arrAudios[0]} controls>
-							<track kind="captions" />
-							<source src={arrAudios[0]} />
-						</audio>
-					</div>
-				</div>
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<div className="sinonimos">
-					<p>Sinonimos:{" "}
-						{
-							arrSinonimos?.map((elsinon) => {
-								return (
-									<span className={cssSigni.spanlossinonimos} key={elsinon}>{elsinon}</span>
-								);
-							})
-						}
-					</p>
-				</div>
-				<div className="definicion" style={{ marginTop: "20px", letterSpacing: "0.05em" }}>
-					<h2>DEFINICION</h2>
-					{
-						arrDefinicion.map((definicion, index) => {
-							return (
-								<ul data-key={definicion} key={definicion} style={{ marginBottom: "20px" }}>
-									<li>{definicion}</li>
-								</ul>
-							);
-						})
-					}
-				</div>
-			</div>
-		);
-	}
-
-	return (
-		<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
-			<p>{" "}</p>
-		</div>
-	);
-}
 
 export default function Home() {
 	const [definicion, setdefinicion] = useState();
