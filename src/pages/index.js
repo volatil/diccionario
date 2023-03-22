@@ -67,33 +67,6 @@ function Significado(props) {
 				<br />
 				<br />
 				<br />
-				{/* <div className="pronunciacion">
-					{
-						estado?.map((elsigni) => {
-							const key = elsigni.pronunciacion + elsigni.definicion;
-							const { audio, pronunciacion } = elsigni;
-							return (
-								<ul data-key={key} key={key} style={{ marginTop: "20px" }}>
-									<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
-										<strong style={{ marginRight: "10px" }}>PRONUN.</strong>{pronunciacion}
-									</li>
-									{
-										audio
-											&& (
-												<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
-													<strong style={{ marginRight: "10px" }}>EJEM.</strong>
-													<audio controls>
-														<track kind="captions" />
-														<source src={audio} />
-													</audio>
-												</li>
-											)
-									}
-								</ul>
-							);
-						})
-					}
-				</div> */}
 				<div className="sinonimos">
 					<p>Sinonimos:{" "}
 						{
