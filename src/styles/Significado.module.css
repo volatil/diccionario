@@ -1,3 +1,30 @@
+.audioCajita {
+	margin-top: 20px;
+	display: flex;
+	justify-content: space-between;
+}
+.palabraBuscada {
+	font-weight: 400;
+	font-size: 2.8em;
+}
+.ladoAudio {
+	display: flex;
+	justify-content: flex-end;
+}
+.ladoAudio .botonReproduceAudio {
+	background-color: transparent;
+	border: none;
+}
+.ladoAudio .botonReproduceAudio > img {
+	width: 50px;
+	margin: 20px 0 0 0;
+}
+.ladoAudio audio {
+	display: none;
+}
+.pronunciacion {
+	color: var( --morado ) !important;
+}
 .spanlossinonimos::after {
 	content:", "
 }

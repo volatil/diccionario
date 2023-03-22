@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 // import Image from "next/image";
 // import { Inter } from "next/font/google";
-import { callAPIreloaded } from "@/helpers/helpers";
+import { callAPIreloaded, playPronunciacion, play } from "@/helpers/helpers";
 import Header from "@/components/Header";
 import Buscador from "@/components/Buscador";
 
@@ -13,11 +13,16 @@ function Significado(props) {
 	const { estado } = props;
 
 	if ( estado ) {
+		const palabra = estado[0].word;
+		const pronunciacion = estado[0].pronunciacion;
+
 		let arrSinonimos = [];
 		let arrDefinicion = [];
+		let arrAudios = [];
 		for ( let count = 0; count <= estado.length - 1; count++ ) {
 			const sinonimo = estado[count].sinonimos;
 			const definicion = estado[count].definicion;
+			const audio = 	estado[count].audio;
 
 			if ( sinonimo ) {
 				arrSinonimos.push(sinonimo);
@@ -25,47 +30,68 @@ function Significado(props) {
 			if ( definicion ) {
 				arrDefinicion.push(definicion);
 			}
+			if ( audio ) {
+				arrAudios.push(audio);
+			}
 		}
 
 		arrSinonimos = [...new Set(arrSinonimos)];
 		arrDefinicion = [...new Set(arrDefinicion)];
+		arrAudios = [...new Set(arrAudios)];
 
 		return (
 			<div className="significado">
+				<div className={cssSigni.audioCajita}>
+					<div>
+						<h2 className={cssSigni.palabraBuscada}>{palabra}</h2>
+						<p className={cssSigni.pronunciacion}>{pronunciacion}</p>
+					</div>
+					<div className={cssSigni.ladoAudio}>
+						<button className={cssSigni.botonReproduceAudio} type="button" onClick={() => { playPronunciacion(); }}>
+							<img src="assets/svg/audio.svg" alt="reproducir audio" />
+						</button>
+
+						<audio id="elaudio" key={arrAudios[0]} controls>
+							<track kind="captions" />
+							<source src={arrAudios[0]} />
+						</audio>
+					</div>
+				</div>
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
+				<br />
 				<div className="pronunciacion">
 					{
-						estado
-							? (
-								estado?.map((elsigni) => {
-									const key = elsigni.pronunciacion + elsigni.definicion;
-									const { audio, pronunciacion } = elsigni;
-									return (
-										<ul data-key={key} key={key} style={{ marginTop: "20px" }}>
-											<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
-												<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
-												<strong style={{ marginRight: "10px" }}>PRONUN.</strong>{pronunciacion}
-											</li>
-											{
-												audio
-													&& (
-														<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
-															<strong style={{ marginRight: "10px" }}>EJEM.</strong>
-															<audio controls>
-																<track kind="captions" />
-																<source src={audio} />
-															</audio>
-														</li>
-													)
-											}
-										</ul>
-									);
-								})
-							) : (
-								<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
-									<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
-									<p>...</p>
-								</div>
-							)
+						estado?.map((elsigni) => {
+							const key = elsigni.pronunciacion + elsigni.definicion;
+							const { audio, pronunciacion } = elsigni;
+							return (
+								<ul data-key={key} key={key} style={{ marginTop: "20px" }}>
+									<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
+										<strong style={{ marginRight: "10px" }}>PRONUN.</strong>{pronunciacion}
+									</li>
+									{
+										audio
+											&& (
+												<li style={{ listStyle: "none", display: "flex", alignItems: "flex-start" }}>
+													<strong style={{ marginRight: "10px" }}>EJEM.</strong>
+													<audio controls>
+														<track kind="captions" />
+														<source src={audio} />
+													</audio>
+												</li>
+											)
+									}
+								</ul>
+							);
+						})
 					}
 				</div>
 				<div className="sinonimos">
@@ -97,7 +123,6 @@ function Significado(props) {
 
 	return (
 		<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
-			<img style={{ width: "20px", margin: "0 10px 10px 0" }} src="/assets/svg/definicion.svg" alt="definicion" />
 			<p>No se encontraron definiciones</p>
 		</div>
 	);

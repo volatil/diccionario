@@ -1,3 +1,7 @@
+export function playPronunciacion() {
+	document.getElementById("elaudio").play();
+}
+
 export function mododarkmode(estado) {
 	if ( estado === "desactivar" ) {
 		const cambioOSCURO = document.querySelector("body");
@@ -19,9 +23,9 @@ export const callAPIreloaded = async function (lapalabra) {
 	}
 
 	const todo = [];
-	// AGREGA FONETICA
 	for ( let count = 0; count <= data[0].phonetics.length - 1; count++ ) {
 		todo.push({
+			word: data[0].word,
 			audio: data[0].phonetics[count].audio,
 			pronunciacion: data[0].phonetics[count].text,
 			definicion: data[0].meanings[0].definitions[count].definition,
