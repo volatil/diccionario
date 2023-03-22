@@ -50,7 +50,6 @@ function Significado(props) {
 						<button className={cssSigni.botonReproduceAudio} type="button" onClick={() => { playPronunciacion(); }}>
 							<img src="assets/svg/audio.svg" alt="reproducir audio" />
 						</button>
-
 						<audio id="elaudio" key={arrAudios[0]} controls>
 							<track kind="captions" />
 							<source src={arrAudios[0]} />

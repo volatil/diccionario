@@ -7,7 +7,7 @@ export default function Darkmode() {
 
 	useEffect(() => {
 		if ( localStorage.getItem("diccionario_darkmode") ) {
-			if ( localStorage.getItem("diccionario_darkmode") === "desactivado" ) {
+			if ( localStorage.getItem("diccionario_darkmode") === "activado" ) {
 				mododarkmode("activar");
 				setdarkmode("activado");
 			} else {
@@ -24,7 +24,7 @@ export default function Darkmode() {
 			<div className={darkmode === "activado" ? `${css.fakeINPUT} ${css.activado}` : `${css.fakeINPUT} ${css.desactivado}`}>
 				<span className={darkmode === "activado" ? `${css.circulo} ${css.activado}` : `${css.circulo} ${css.desactivado}`} />
 			</div>
-			<img className={css.isotipo} src={darkmode === "activado" ? "/assets/svg/darkmode_moon.svg" : "/assets/svg/darkmode_sun.svg"} alt="definicion" />
+			<img className={css.isotipo} src={darkmode === "activado" ? "/assets/svg/darkmode_sun.svg" : "/assets/svg/darkmode_moon.svg"} alt="definicion" />
 		</button>
 	);
 }

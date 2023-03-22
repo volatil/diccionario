@@ -9,14 +9,14 @@ button#darkmode {
 	float: right;
 	margin: 20px 5px 0px 0px;
 }
-.fakeINPUT.activado {
+.fakeINPUT.desactivado {
 	width: 60px;
 	height: 30px;
 	background: var(--morado);
 	border-radius: 20px;
 	position: relative;
 }
-.fakeINPUT.desactivado {
+.fakeINPUT.activado {
 	width: 60px;
 	height: 30px;
 	background: var(--grisOscuro);
@@ -28,10 +28,10 @@ button#darkmode {
 	display: block;
 	border-radius: 50%;
 	position: relative;
-	top: 8%;
-	right: -32px;
 	width: 43%;
 	height: 86%;
+	top: 8%;
+	left: 3px;
 }
 .circulo.desactivado {
 	background: white;
@@ -40,8 +40,8 @@ button#darkmode {
 	display: block;
 	border-radius: 50%;
 	position: relative;
-	top: 2px;
-	left: 3px;
+	top: 8%;
+	right: -32px;
 }
 .isotipo {
 	position: relative;
