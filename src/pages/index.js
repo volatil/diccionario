@@ -95,7 +95,7 @@ function Significado(props) {
 
 	return (
 		<div style={{ display: "flex", alignItems: "flex-start", marginTop: "20px" }}>
-			<p>No se encontraron definiciones</p>
+			<p>{" "}</p>
 		</div>
 	);
 }

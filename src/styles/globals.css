@@ -5,7 +5,7 @@
 	--moradoOscuro: #502799;
 	--grisOscuro: #787878;
 	
-	--max-width: 1100px;
+	/* --max-width: 1100px;
 	--border-radius: 12px;
 	--font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
 	'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
@@ -43,7 +43,7 @@
 	--callout-rgb: 238, 240, 241;
 	--callout-border-rgb: 172, 175, 176;
 	--card-rgb: 180, 185, 188;
-	--card-border-rgb: 131, 134, 135;
+	--card-border-rgb: 131, 134, 135; */
 }
 * {
 	box-sizing: border-box;
@@ -60,18 +60,26 @@ body {
 body {
 	color: #222;
 	background: #fff;
- }
- p {
+}
+p {
 	color: black;
- }
- /* Dark Mode styles */
- body.darkmode {
+}
+input {
+	background: white;
+	color: black;
+}
+/* Dark Mode styles */
+body.darkmode {
 	color: #eee;
 	background: #121212;
- }
- body.darkmode p {
+}
+body.darkmode p {
 	color: white;
- }
+}
+body.darkmode input {
+	background: #363636;
+	color: white;
+}
 main {
 	width: 90%;
 	margin: 0 auto;
