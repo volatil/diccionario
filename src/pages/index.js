@@ -67,7 +67,7 @@ function Significado(props) {
 				<br />
 				<br />
 				<br />
-				<div className="pronunciacion">
+				{/* <div className="pronunciacion">
 					{
 						estado?.map((elsigni) => {
 							const key = elsigni.pronunciacion + elsigni.definicion;
@@ -93,7 +93,7 @@ function Significado(props) {
 							);
 						})
 					}
-				</div>
+				</div> */}
 				<div className="sinonimos">
 					<p>Sinonimos:{" "}
 						{
