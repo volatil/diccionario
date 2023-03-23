@@ -4,46 +4,6 @@
 	--morado: #9e55e0;
 	--moradoOscuro: #502799;
 	--grisOscuro: #787878;
-	
-	/* --max-width: 1100px;
-	--border-radius: 12px;
-	--font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-	'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-	'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
-	
-	--foreground-rgb: 0, 0, 0;
-	--background-start-rgb: 214, 219, 220;
-	--background-end-rgb: 255, 255, 255;
-	
-	--primary-glow: conic-gradient(
-	from 180deg at 50% 50%,
-	#16abff33 0deg,
-	#0885ff33 55deg,
-	#54d6ff33 120deg,
-	#0071ff33 160deg,
-	transparent 360deg
-	);
-	--secondary-glow: radial-gradient(
-	rgba(255, 255, 255, 1),
-	rgba(255, 255, 255, 0)
-	);
-	
-	--tile-start-rgb: 239, 245, 249;
-	--tile-end-rgb: 228, 232, 233;
-	--tile-border: conic-gradient(
-	#00000080,
-	#00000040,
-	#00000030,
-	#00000020,
-	#00000010,
-	#00000010,
-	#00000080
-	);
-	
-	--callout-rgb: 238, 240, 241;
-	--callout-border-rgb: 172, 175, 176;
-	--card-rgb: 180, 185, 188;
-	--card-border-rgb: 131, 134, 135; */
 }
 * {
 	box-sizing: border-box;
@@ -68,6 +28,15 @@ input {
 	background: #ccc;
 	color: black;
 }
+.linkExterno {
+	color: black;
+}
+.linkExterno span {
+	background-image: url("/assets/svg/link_negro.svg");
+}
+p.sinonimos > span::after {
+	color: black;
+}
 /* Dark Mode styles */
 body.darkmode {
 	color: #eee;
@@ -80,12 +49,23 @@ body.darkmode input {
 	background: #363636;
 	color: white;
 }
-body.darkmode .pronunciacion {
-	color: var( --morado );
-}
 body.darkmode p.sinonimos {
 	color: #444444;
 }
+body.darkmode p.sinonimos > span::after {
+	color: white;
+}
+body.darkmode .linkExterno {
+	color: white;
+}
+body.darkmode .linkExterno span {
+	background-image: url("/assets/svg/link.svg");
+}
+
+body p.pronunciacion {
+	color: var( --morado );
+}
+
 main {
 	width: 90%;
 	margin: 0 auto;

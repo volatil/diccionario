@@ -65,8 +65,32 @@
 }
 .sinonimos > p > span::after {
 	content:", ";
-	color: white;
 }
 .sinonimos > p > span:last-of-type::after {
 	content:"";
+}
+
+/* SOURCE */
+.source {
+	margin-top: 40px;
+}
+.source > span {
+	height: 1px;
+	width: 100%;
+	background-color: #444;
+	display: block;
+}
+.source > p {
+	margin-top: 15px;
+}
+.source > p > a {
+	font-size: 0.9em;
+	display: flex;
+	margin-top: 10px;
+}
+.source > p > a > span {
+	width: 20px;
+	height: 20px;
+	display: block;
+	margin-left: 10px;
 }

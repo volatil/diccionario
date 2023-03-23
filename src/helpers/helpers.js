@@ -18,6 +18,8 @@ export const callAPIreloaded = async function (lapalabra) {
 	const api = `https://api.dictionaryapi.dev/api/v2/entries/en/${lapalabra}`;
 	const res = await fetch( api );
 	const data = await res.json();
+	console.debug( data );
+	console.debug( data.title );
 	if ( data.title ) {
 		return false;
 	}
@@ -52,7 +54,7 @@ export const callAPIreloaded = async function (lapalabra) {
 	lossinonimos = [...new Set(lossinonimos)];
 	todo.push({ sinonimos: lossinonimos });
 
-	// FUENTE
+	// // FUENTE
 	todo.push({ fuente: data[0].sourceUrls });
 
 	// TEST lo pusheado al array

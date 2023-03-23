@@ -10,7 +10,7 @@ function Titulo(props) {
 		>
 			<span>{titulo}</span>
 			<span style={{
-				height: "2px", width: "100%", display: "block", background: "#444", marginLeft: "20px",
+				height: "1px", width: "100%", display: "block", background: "#444", marginLeft: "20px",
 			}}
 			/>
 		</h3>
@@ -28,8 +28,8 @@ function Significado(props) {
 			audio: estado[2].audio,
 			definiciones: estado[3].definiciones,
 			sinonimos: estado[4].sinonimos,
+			fuente: estado[5].fuente,
 		};
-		// console.debug( data.audio );
 
 		return (
 			<div className="significado">
@@ -69,7 +69,7 @@ function Significado(props) {
 					{
 						data.sinonimos.length >= 1
 							&& (
-								<p className="sinonimos">Synonyms:{" "}
+								<p className="sinonimos">Synonyms{" "}
 									{
 										data.sinonimos?.map((elsinon) => {
 											return (
@@ -81,25 +81,18 @@ function Significado(props) {
 							)
 					}
 				</div>
-				{/* <div className={cssSigni.verbos}>
-					<Titulo titulo="verb" />
-					<ul style={{ marginBottom: "20px" }}>
+				<div className={cssSigni.source}>
+					<span />
+					<p>Source{" "}
 						{
-							arrVerbos.map((values, lakey) => {
-								const key = values + lakey;
+							data.fuente?.map((fuente) => {
 								return (
-									<li key={key}>
-										<span>{values}</span>
-									</li>
+									<a className="linkExterno" target="_blank" rel="noreferrer" href={fuente} key={fuente}>{fuente}<span /></a>
 								);
 							})
 						}
-					</ul>
-				</div> */}
-				<br />
-				<br />
-				<br />
-				<br />
+					</p>
+				</div>
 			</div>
 		);
 	}
