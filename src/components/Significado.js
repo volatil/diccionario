@@ -28,6 +28,7 @@ function Significado(props) {
 			definiciones: estado[3].definiciones,
 			sinonimos: estado[4].sinonimos,
 		};
+		console.debug( data.sinonimos.length >= 1 );
 
 		return (
 			<div className="significado">
@@ -36,15 +37,20 @@ function Significado(props) {
 						<h2 className={cssSigni.palabraBuscada}>{data.palabra}</h2>
 						<p className="pronunciacion">{data.pronunciacion}</p>
 					</div>
-					<div className={cssSigni.ladoAudio}>
-						<button className={cssSigni.botonReproduceAudio} type="button" onClick={() => { playPronunciacion(); }}>
-							<img src="assets/svg/audio.svg" alt="reproducir audio" />
-						</button>
-						<audio id="elaudio" key={estado[2].audio} controls>
-							<track kind="captions" />
-							<source src={estado[2].audio} />
-						</audio>
-					</div>
+					{
+						data.audio
+							&& (
+								<div className={cssSigni.ladoAudio}>
+									<button className={cssSigni.botonReproduceAudio} type="button" onClick={() => { playPronunciacion(); }}>
+										<img src="assets/svg/audio.svg" alt="reproducir audio" />
+									</button>
+									<audio id="elaudio" key={estado[2].audio} controls>
+										<track kind="captions" />
+										<source src={estado[2].audio} />
+									</audio>
+								</div>
+							)
+					}
 				</div>
 				<div className={cssSigni.definiciones}>
 					<Titulo titulo="noun" />
@@ -59,15 +65,20 @@ function Significado(props) {
 					</ul>
 				</div>
 				<div className={cssSigni.sinonimos}>
-					<p className="sinonimos">Synonyms:{" "}
-						{
-							data.sinonimos?.map((elsinon) => {
-								return (
-									<span key={elsinon}>{elsinon}</span>
-								);
-							})
-						}
-					</p>
+					{
+						data.sinonimos.length >= 1
+							&& (
+								<p className="sinonimos">Synonyms:{" "}
+									{
+										data.sinonimos?.map((elsinon) => {
+											return (
+												<span key={elsinon}>{elsinon}</span>
+											);
+										})
+									}
+								</p>
+							)
+					}
 				</div>
 				{/* <div className={cssSigni.verbos}>
 					<Titulo titulo="verb" />
