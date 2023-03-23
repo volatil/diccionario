@@ -21,7 +21,7 @@ function Significado(props) {
 	const { estado } = props;
 
 	if ( estado ) {
-		console.debug( estado );
+		// console.debug( estado );
 		const data = {
 			palabra: estado[0].palabra,
 			pronunciacion: estado[1].pronunciacion,

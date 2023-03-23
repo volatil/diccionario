@@ -47,12 +47,15 @@ export const callAPIreloaded = async function (lapalabra) {
 	todo.push({ definiciones });
 
 	// SINONIMOS
-	todo.push({ sinonimos: data[0].meanings[0].synonyms });
+	let lossinonimos = [data[0].meanings[0].synonyms];
+	lossinonimos = lossinonimos[0];
+	lossinonimos = [...new Set(lossinonimos)];
+	todo.push({ sinonimos: lossinonimos });
 
 	// FUENTE
 	todo.push({ fuente: data[0].sourceUrls });
 
 	// TEST lo pusheado al array
-	// console.debug( todo );
+	console.debug( todo );
 	return todo;
 };
