@@ -65,7 +65,7 @@ p {
 	color: black;
 }
 input {
-	background: white;
+	background: #ccc;
 	color: black;
 }
 /* Dark Mode styles */
@@ -79,6 +79,12 @@ body.darkmode p {
 body.darkmode input {
 	background: #363636;
 	color: white;
+}
+body.darkmode .pronunciacion {
+	color: var( --morado );
+}
+body.darkmode p.sinonimos {
+	color: #444444;
 }
 main {
 	width: 90%;

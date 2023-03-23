@@ -1,86 +1,93 @@
 import { playPronunciacion } from "@/helpers/helpers";
 import cssSigni from "@/styles/Significado.module.css";
 
+function Titulo(props) {
+	const { titulo } = props;
+	return (
+		<h3 style={{
+			display: "flex", alignItems: "center", height: "40px", marginBottom: "20px",
+		}}
+		>
+			<span>{titulo}</span>
+			<span style={{
+				height: "2px", width: "100%", display: "block", background: "#444", marginLeft: "20px",
+			}}
+			/>
+		</h3>
+	);
+}
+
 function Significado(props) {
 	const { estado } = props;
 
 	if ( estado ) {
-		const palabra = estado[0].word;
-		const pronunciacion = estado[0].pronunciacion;
-
-		let arrSinonimos = [];
-		let arrDefinicion = [];
-		let arrAudios = [];
-		for ( let count = 0; count <= estado.length - 1; count++ ) {
-			const sinonimo = estado[count].sinonimos;
-			const definicion = estado[count].definicion;
-			const audio = 	estado[count].audio;
-
-			if ( sinonimo ) {
-				arrSinonimos.push(sinonimo);
-			}
-			if ( definicion ) {
-				arrDefinicion.push(definicion);
-			}
-			if ( audio ) {
-				arrAudios.push(audio);
-			}
-		}
-
-		arrSinonimos = [...new Set(arrSinonimos)];
-		arrDefinicion = [...new Set(arrDefinicion)];
-		arrAudios = [...new Set(arrAudios)];
+		console.debug( estado );
+		const data = {
+			palabra: estado[0].palabra,
+			pronunciacion: estado[1].pronunciacion,
+			definiciones: estado[3].definiciones,
+			sinonimos: estado[4].sinonimos,
+		};
 
 		return (
 			<div className="significado">
-				<div className={cssSigni.audioCajita}>
+				<div className={cssSigni.audio}>
 					<div>
-						<h2 className={cssSigni.palabraBuscada}>{palabra}</h2>
-						<p className={cssSigni.pronunciacion}>{pronunciacion}</p>
+						<h2 className={cssSigni.palabraBuscada}>{data.palabra}</h2>
+						<p className="pronunciacion">{data.pronunciacion}</p>
 					</div>
 					<div className={cssSigni.ladoAudio}>
 						<button className={cssSigni.botonReproduceAudio} type="button" onClick={() => { playPronunciacion(); }}>
 							<img src="assets/svg/audio.svg" alt="reproducir audio" />
 						</button>
-						<audio id="elaudio" key={arrAudios[0]} controls>
+						<audio id="elaudio" key={estado[2].audio} controls>
 							<track kind="captions" />
-							<source src={arrAudios[0]} />
+							<source src={estado[2].audio} />
 						</audio>
 					</div>
 				</div>
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<br />
-				<div className="sinonimos">
-					<p>Sinonimos:{" "}
+				<div className={cssSigni.definiciones}>
+					<Titulo titulo="noun" />
+					<ul style={{ marginBottom: "20px" }}>
 						{
-							arrSinonimos?.map((elsinon) => {
+							data.definiciones.map((definicion) => {
 								return (
-									<span className={cssSigni.spanlossinonimos} key={elsinon}>{elsinon}</span>
+									<li key={definicion}>{definicion}</li>
+								);
+							})
+						}
+					</ul>
+				</div>
+				<div className={cssSigni.sinonimos}>
+					<p className="sinonimos">Synonyms:{" "}
+						{
+							data.sinonimos?.map((elsinon) => {
+								return (
+									<span key={elsinon}>{elsinon}</span>
 								);
 							})
 						}
 					</p>
 				</div>
-				<div className="definicion" style={{ marginTop: "20px", letterSpacing: "0.05em" }}>
-					<h2>DEFINICION</h2>
-					{
-						arrDefinicion.map((definicion, index) => {
-							return (
-								<ul data-key={definicion} key={definicion} style={{ marginBottom: "20px" }}>
-									<li>{definicion}</li>
-								</ul>
-							);
-						})
-					}
-				</div>
+				{/* <div className={cssSigni.verbos}>
+					<Titulo titulo="verb" />
+					<ul style={{ marginBottom: "20px" }}>
+						{
+							arrVerbos.map((values, lakey) => {
+								const key = values + lakey;
+								return (
+									<li key={key}>
+										<span>{values}</span>
+									</li>
+								);
+							})
+						}
+					</ul>
+				</div> */}
+				<br />
+				<br />
+				<br />
+				<br />
 			</div>
 		);
 	}

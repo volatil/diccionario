@@ -1,4 +1,5 @@
-.audioCajita {
+/* AUDIO */
+.audio {
 	margin-top: 20px;
 	display: flex;
 	justify-content: space-between;
@@ -23,12 +24,48 @@
 .ladoAudio audio {
 	display: none;
 }
-.pronunciacion {
-	color: var( --morado ) !important;
+
+/* DEFINICIONES */
+.definiciones {
+	margin-top: 20px;
+	letter-spacing: 0.05em;
 }
-.spanlossinonimos::after {
-	content:", "
+.definiciones ul {
+	list-style: none; /* Remove default bullets */
 }
-.spanlossinonimos:last-of-type::after {
-	content:""
+.definiciones ul li {
+	margin-bottom: 20px;
+	position: relative;
+	margin-left: 15px;
+	line-height: 1.4em;
+}
+.definiciones ul li::before {
+	content: "\2022";
+	color: var( --morado );
+	font-weight: bold;
+	display: inline-block;
+	width: 1em;
+	position: absolute;
+	left: -15px;
+}
+
+/* SINONIMOS */
+.sinonimos {
+	margin-bottom: 20px;
+}
+.sinonimos > p {
+	font-size: .9em;
+}
+.sinonimos > p > span {
+	color: var(--morado)
+}
+.sinonimos > p > span:first-of-type {
+	margin-left: 20px;
+}
+.sinonimos > p > span::after {
+	content:", ";
+	color: white;
+}
+.sinonimos > p > span:last-of-type::after {
+	content:"";
 }

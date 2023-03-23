@@ -23,16 +23,34 @@ export const callAPIreloaded = async function (lapalabra) {
 	}
 
 	const todo = [];
+
+	// PALABRA
+	todo.push({ palabra: data[0].word });
+
+	// PRONUNCIACION
+	todo.push({ pronunciacion: data[0].phonetic });
+
+	// AUDIO
+	const audio = [];
 	for ( let count = 0; count <= data[0].phonetics.length - 1; count++ ) {
-		todo.push({
-			word: data[0].word,
-			audio: data[0].phonetics[count].audio,
-			pronunciacion: data[0].phonetics[count].text,
-			definicion: data[0].meanings[0].definitions[count].definition,
-			ejemplo: data[0].meanings[0].definitions[count].example,
-			sinonimos: data[0].meanings[0].synonyms[count],
-		});
+		if ( data[0].phonetics[count].audio.length >= 4 ) {
+			audio.push(data[0].phonetics[count].audio);
+		}
 	}
+	todo.push({ audio: audio[0] });
+
+	// DEFINICIONES
+	const definiciones = [];
+	for ( let count = 0; count <= data[0].meanings[0].definitions.length - 1; count++ ) {
+		definiciones.push(data[0].meanings[0].definitions[count].definition);
+	}
+	todo.push({ definiciones });
+
+	// SINONIMOS
+	todo.push({ sinonimos: data[0].meanings[0].synonyms });
+
+	// FUENTE
+	todo.push({ fuente: data[0].sourceUrls });
 
 	// TEST lo pusheado al array
 	// console.debug( todo );
