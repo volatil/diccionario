@@ -21,7 +21,7 @@ export default function Home() {
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<main>
-				<Header />
+				<Header limpiar={() => { setdefinicion(false); }} />
 
 				<Buscador>
 					<button className={cssBuscador.botonBuscar} type="button" onClick={async () => { const palabra = document.querySelector("#inputBUSCADOR").value; const respuesta = await callAPIreloaded(palabra); setdefinicion(respuesta); }}>
